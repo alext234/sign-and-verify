@@ -1,0 +1,14 @@
+sudo: required
+dist: trusty
+language: python
+python:
+  - "3.6"
+before_script:
+  - curl https://nixos.org/nix/install | sh
+  - . ~/.nix-profile/etc/profile.d/nix.sh
+  - nix-channel --add https://nix.dapphub.com/pkgs/dapphub
+  - nix-channel --update
+  - nix-env -iA dapphub.master.{dapp,seth,hevm,solc}
+
+script:
+  - ./.travis-test
