@@ -7,7 +7,8 @@ ETHRUN=https://github.com/dapphub/ethrun/releases/download/v0.2.4/ethrun-v0.2.4-
 make all
 
 # run unit tests
-make test
+#make test
+dapp test-ethrun
 
 # run testnet tests
 dapp testnet --accounts=2 -- ./testnet_script.sh
