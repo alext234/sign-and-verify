@@ -12,29 +12,37 @@ ACCOUNT2=$(seth rpc eth_accounts|sed 2p -n)
 export ETH_FROM=$ACCOUNT2
 msg="Hello World"
 hexData=$(seth --from-ascii $msg)
-hexDataFixedSize=$(seth keccak $hexData)
+#hexDataFixedSize=$(seth keccak $hexData)
 
-signedData=$(seth sign $hexDataFixedSize)
+hexDataToWord=$(seth --to-word $hexData)
+signedData=$(seth sign $hexData)
 r=0x${signedData:2:64}
 s=0x${signedData:66:64}
 v=0x${signedData:130:2}
 
 
 # create the contract 
-export ETH_FROM=$ACCOUNT1
-export ETH_GAS=4500000
+#export ETH_FROM=$ACCOUNT1
+#export ETH_GAS=4500000
 
-echo "" > empty-password.txt
-verifier=$(dapp create  verifier -S empty-password.txt)
+#echo "" > empty-password.txt
+#verifier=$(dapp create  verifier -S empty-password.txt)
 
 
 # call the contract to verify the message
-isSigned=$(seth call $verifier \
-	'isSigned(address,bytes32,uint8,bytes32,bytes32)(bool)' \
-	$ACCOUNT2 \
-	$hexDataFixedSize \
-	$(seth --to-word $v) \
-	$r \
-	$s)
+#isSigned=$(seth call $verifier \
+#	'isSigned(address,bytes32,uint8,bytes32,bytes32)(bool)' \
+#	$ACCOUNT1 \
+#	$hexDataFixedSize \
+#	$(seth --to-word $v) \
+#	$r \
+#	$s)
 
+
+#signAddr=$(seth call $verifier \
+#	'getSignAddress(bytes32,uint8,bytes32,bytes32)(address)' \
+#	$hexDataFixedSize \
+#	$(seth --to-word $v) \
+#	$r \
+#	$s)
 
