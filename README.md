@@ -12,8 +12,8 @@ TODO: update the flow with nodejs script using `web3`.
 ```
 > node -v
 v9.8.0
-> npm -v web3
-5.6.0
+> npm view web3 version
+1.0.0-beta.33
 
 ``` 
 
