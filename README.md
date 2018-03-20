@@ -6,7 +6,16 @@ This project demonstrate a simple example of signing a message locally (off-chai
 with the JSON RPC `eth_sign`. The signature can be verified by through a 
 smart contract which makes uses of the Solidity's `ecrecover`  function.
 
-TODO: update the flow with nodejs script using `web3`. 
+TODO: update the flow with nodejs script using `web3`.
+`node` and `web3` versions are:
+
+```
+> node -v
+v9.8.0
+> npm -v web3
+5.6.0
+
+``` 
 
 # Starting a testnet
 
