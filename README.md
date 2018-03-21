@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/alext234/sign-and-verify.svg?branch=master)](https://travis-ci.org/alext234/sign-and-verify)
+[![Build Status](https://travis-ci.org/alext234/sign-and-verify.svg?branch=sign-with-web3)](https://travis-ci.org/alext234/sign-and-verify)
 
 # Signing and Verifying with Ethereum
 
@@ -6,16 +6,6 @@ This project demonstrate a simple example of signing a message locally (off-chai
 with the JSON RPC `eth_sign`. The signature can be verified by through a 
 smart contract which makes uses of the Solidity's `ecrecover`  function.
 
-TODO: update the flow with nodejs script using `web3`.
-`node` and `web3` versions are:
-
-```
-> node -v
-v9.8.0
-> npm view web3 version
-1.0.0-beta.33
-
-``` 
 
 # Starting a testnet
 
@@ -101,3 +91,43 @@ isSigned=$(seth call $verifier \
 
 ```
 
+# Signing and verifying with `web3`
+
+The script [testnet-web3.js](testnet-web3.js) comes with the following flow:
+
+- Get list of accounts (at least 2 are expected).
+- Sign a message with one account.
+- Deploy verifier contract with another account.
+- Call the contract `isSigned` method to verify the signature.
+
+
+
+The following versions `nodejs` and `web3` have been tested:
+
+```
+> node -v
+v9.8.0
+> npm view web3 version
+1.0.0-beta.33
+```
+
+To run the script:
+
+- Make sure the contract is compiled:
+
+```
+dapp build
+```
+
+- Run a testnet with 2 accounts, e.g. with `dapp` (on a separate console):
+
+```
+dapp testnet --accounts 2
+```
+
+- Run the script:
+
+
+```
+node testnet-web3.js
+```
