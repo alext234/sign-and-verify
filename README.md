@@ -93,3 +93,31 @@ isSigned=$(seth call $verifier \
 
 ```
 
+# Deploy on testnet
+
+A `verifier` contract is deployed on the `Rinkeby` testnet at https://rinkeby.etherscan.io/address/0x14617305e1ffea4af4bdf2c98d177a0efbb698d0
+
+Following are the steps to deploy with `dapp`.
+
+- Make a clean build
+
+```
+dapp clean
+dapp build
+```
+
+- Set the environment variables for `dapp`:
+
+
+```
+export ETH_FROM=<account to deploy>
+export ETH_RPC_URL=https://rinkeby.infura.io
+export ETH_GAS=4500000
+export ETH_KEYSTORE=~/rinkeby-testnet
+```
+
+- Create the contract
+
+```
+dapp create verifier
+```
