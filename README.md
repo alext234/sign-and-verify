@@ -133,3 +133,6 @@ dapp testnet --accounts 2
 ```
 node testnet-web3.js
 ```
+
+# Signing and verifying with `web3` at the browser
+TODO
