@@ -99,7 +99,9 @@ The script [testnet-web3.js](testnet-web3.js) comes with the following flow:
 - Sign a message with one account.
 - Deploy verifier contract with another account.
 - Call the contract `isSigned` method to verify the signature.
-
+- In this branch, the execution is via nodejs at the console. 
+There is another branch where I am working on which is to sign 
+at the browser with the help of Metamask. 
 
 
 The following versions `nodejs` and `web3` have been tested:
