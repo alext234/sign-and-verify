@@ -13,4 +13,15 @@ matrix:
 		  	- nix-env -iA dapphub.master.{dapp,seth,hevm,solc}
 		
 		  script:
-		  	- ./.travis-test
+		  	- ./.travis-build
+		  	- dapp testnet --accounts=2 -- ./testnet_script.sh
+
+		- language: node_js
+		  node_js:
+		  	- "9.8.0"
+		  before_script:
+		  	npm install -g web3
+		  script:
+		  	- ./.travis-build
+		  	- dapp testnet --accounts=2 -- node testnet-web3.js
+		  

@@ -9,6 +9,3 @@ make all
 # run unit tests
 #make test
 dapp test-ethrun
-
-# run testnet tests
-dapp testnet --accounts=2 -- ./testnet_script.sh
