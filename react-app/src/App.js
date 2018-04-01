@@ -4,6 +4,7 @@ import './App.css';
 
 import Web3 from 'web3';
 
+const verifierABI = [{"constant":true,"inputs":[{"name":"hasPrefix","type":"bool"},{"name":"msgHash","type":"bytes32"},{"name":"v","type":"uint8"},{"name":"r","type":"bytes32"},{"name":"s","type":"bytes32"}],"name":"getSignAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[{"name":"hasPrefix","type":"bool"},{"name":"_addr","type":"address"},{"name":"msgHash","type":"bytes32"},{"name":"v","type":"uint8"},{"name":"r","type":"bytes32"},{"name":"s","type":"bytes32"}],"name":"isSigned","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"pure","type":"function"}]
 
 class App extends Component {
   
@@ -12,7 +13,8 @@ class App extends Component {
     web3js:undefined,
     msgHash:'',
     signResult:'',
-    verifierAddress:'0x14617305e1FFEA4AF4bdf2c98D177a0eFBB698D0',
+    verifierAddress:'0x14dfc2d0e5498cc65c75ce0a2e5c48902553793c', // address of the contract
+    verifiedSignAddress:'', // address calculated from the verifier contract
   };
   
   signCallback = (error, results) => {
@@ -22,6 +24,7 @@ class App extends Component {
       
     } else {
       this.setState({signResult:results})
+      console.log("signed message = "+results)
     }
   }
 
@@ -51,17 +54,41 @@ class App extends Component {
   }
 
   handleVerifyButton= () => {
-    
+    this.state.web3js.eth.getAccounts((error, accounts)=>{
+      if (accounts.length === 0) {
+        console.log("no account found")
+      } else {
+        const ethFromAddress = accounts[0] // address to call the contract from
+        const signature = this.state.signResult.substr(2); // remove the '0x'
+        const r = '0x' + signature.slice(0, 64)
+        const s = '0x' + signature.slice(64, 128)
+        const v = '0x' + signature.slice(128, 130)
+        const v_decimal = this.state.web3js.utils.toDecimal(v)
+        console.log("r="+r)
+        console.log("s="+s)
+        console.log("v="+v)
+        console.log("v_decimal="+v_decimal)
+        const verifierContract = new this.state.web3js.eth.Contract(verifierABI, this.state.verifierAddress);
+        verifierContract.methods
+          .getSignAddress(false, this.state.msgHash, v, r, s)
+          .call({from: ethFromAddress})
+          .then(result => {
+            console.log("sign address = " + result)
+            this.setState({verifiedSignAddress:result})
+          })
+      }
+    });
+
   }
   
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Sign (off-chain) and verify with smart contract</h1>
         </header>
         
+          <h2 className="App-title">Sign</h2>
           <p>Enter message to sign</p>
           <input onChange={(event) => this.setState({msg: event.target.value})} 
             value={this.state.msg}/>	   
@@ -75,10 +102,19 @@ class App extends Component {
           </div>
           <div className="container">
             <span style={{width:'500px'}}>          <b>Signed msg:  </b>
+                {this.state.signResult}
+            </span>
+          </div>
+          
+          <hr />
+          <h2 className="App-title">Verify</h2>
+          <div className="container">
+            <span style={{width:'500px'}}>          <b>Signed msg:  </b>
               <input onChange={(event) => this.setState({signResult: event.target.value})} 
                 value={this.state.signResult}/>     
             </span>
           </div>
+          
           <div className="container">
             <span style={{width:'500px'}}>          <b>Verifier contract address:  </b>
               <input onChange={(event) => this.setState({signResult: event.target.value})} 
@@ -88,6 +124,10 @@ class App extends Component {
           <p>
           <button onClick={()=>this.handleVerifyButton()} >Click to verify</button>
           </p>
+          <div className="container">
+            <b> Signer address : </b>
+           {this.state.verifiedSignAddress}
+          </div>
 
       </div>
     );
