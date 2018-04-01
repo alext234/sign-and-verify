@@ -7,6 +7,11 @@
   height: 80px;
 }
 
+.container span {
+  display: inline-block;
+  word-break: break-all;
+}
+
 .App-header {
   background-color: #222;
   height: 150px;

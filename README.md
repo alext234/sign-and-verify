@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/alext234/sign-and-verify.svg?branch=sign-with-web3)](https://travis-ci.org/alext234/sign-and-verify)
+[![Build Status](https://travis-ci.org/alext234/sign-and-verify.svg?branch=sign-with-web3-metamask)](https://travis-ci.org/alext234/sign-and-verify)
 
 # Signing and Verifying with Ethereum
 
