@@ -12,6 +12,7 @@ class App extends Component {
     web3js:undefined,
     msgHash:'',
     signResult:'',
+    verifierAddress:'0x14617305e1FFEA4AF4bdf2c98D177a0eFBB698D0',
   };
   
   signCallback = (error, results) => {
@@ -48,6 +49,10 @@ class App extends Component {
       this.state.web3js.eth.getAccounts(this.getAccountsCallback);
     }
   }
+
+  handleVerifyButton= () => {
+    
+  }
   
   render() {
     return (
@@ -69,11 +74,21 @@ class App extends Component {
             </span>
           </div>
           <div className="container">
-            <span style={{width:'500px'}}> 
-              <b>Signed msg</b>: {this.state.signResult}
+            <span style={{width:'500px'}}>          <b>Signed msg:  </b>
+              <input onChange={(event) => this.setState({signResult: event.target.value})} 
+                value={this.state.signResult}/>     
             </span>
-
           </div>
+          <div className="container">
+            <span style={{width:'500px'}}>          <b>Verifier contract address:  </b>
+              <input onChange={(event) => this.setState({signResult: event.target.value})} 
+                value={this.state.verifierAddress}/>     
+            </span>
+          </div>
+          <p>
+          <button onClick={()=>this.handleVerifyButton()} >Click to verify</button>
+          </p>
+
       </div>
     );
   }
