@@ -35,7 +35,8 @@ verifier=$(dapp create  verifier -S empty-password.txt)
 
 # call the contract to get the signer address
 signAddr=$(seth call $verifier \
-	'getSignAddress(bytes32,uint8,bytes32,bytes32)(address)' \
+	'getSignAddress(bool,bytes32,uint8,bytes32,bytes32)(address)' \
+	true \
 	$hexDataFixedSize \
 	$(seth --to-word $v) \
 	$r \
@@ -49,7 +50,8 @@ fi
 
 # call the contract to verify the message
 isSigned=$(seth call $verifier \
-	'isSigned(address,bytes32,uint8,bytes32,bytes32)(bool)' \
+	'isSigned(bool,address,bytes32,uint8,bytes32,bytes32)(bool)' \
+	true \
 	$ACCOUNT2 \
 	$hexDataFixedSize \
 	$(seth --to-word $v) \
