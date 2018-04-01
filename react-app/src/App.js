@@ -11,8 +11,8 @@ class App extends Component {
   state = {
     msg:'Hello World',
     web3js:undefined,
-    msgHash:'',
-    signResult:'',
+    msgHash:'', // the keccak256 hash of msg
+    signResult:'', // the signed data of msgHash
     verifierAddress:'0x14dfc2d0e5498cc65c75ce0a2e5c48902553793c', // address of the contract
     verifiedSignAddress:'', // address calculated from the verifier contract
   };
@@ -28,7 +28,7 @@ class App extends Component {
     }
   }
 
-  getAccountsCallback = (error, accounts) => {
+  getAccountsCallbackToSign = (error, accounts) => {
     if (accounts.length === 0) {
       console.log("There is no account from metamask")
     }
@@ -49,7 +49,7 @@ class App extends Component {
     } else {
       // Use Mist/MetaMask's provider
       this.state.web3js = new Web3(window.web3.currentProvider);
-      this.state.web3js.eth.getAccounts(this.getAccountsCallback);
+      this.state.web3js.eth.getAccounts(this.getAccountsCallbackToSign);
     }
   }
 
