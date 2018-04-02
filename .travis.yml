@@ -4,7 +4,7 @@ matrix:
   include:
     - language: python
       python:
-        - "3.6"
+        - 3.6
       before_script:
         - curl https://nixos.org/nix/install | sh
         - . ~/.nix-profile/etc/profile.d/nix.sh
@@ -18,7 +18,7 @@ matrix:
 
     - language: node_js
       node_js:
-        - "9.8.0"
+        - 9.8.0
       before_script:
         - npm install -g web3
       script:
