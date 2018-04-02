@@ -23,6 +23,7 @@ matrix:
         - nix-channel --add https://nix.dapphub.com/pkgs/dapphub
         - nix-channel --update
         - nix-env -iA dapphub.master.{dapp,seth,hevm,solc}
+        - npm init
         - npm install -g web3
       script:
         - ./.travis-build
