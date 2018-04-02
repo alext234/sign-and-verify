@@ -2,9 +2,7 @@ sudo: required
 dist: trusty
 matrix:
   include:
-    - language: python
-      python:
-        - 3.6
+    - language: generic
       before_script:
         - curl https://nixos.org/nix/install | sh
         - . ~/.nix-profile/etc/profile.d/nix.sh
@@ -20,6 +18,11 @@ matrix:
       node_js:
         - 9.8.0
       before_script:
+        - curl https://nixos.org/nix/install | sh
+        - . ~/.nix-profile/etc/profile.d/nix.sh
+        - nix-channel --add https://nix.dapphub.com/pkgs/dapphub
+        - nix-channel --update
+        - nix-env -iA dapphub.master.{dapp,seth,hevm,solc}
         - npm install -g web3
       script:
         - ./.travis-build
