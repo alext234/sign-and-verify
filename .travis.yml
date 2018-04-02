@@ -28,4 +28,4 @@ matrix:
         - dapp testnet --accounts=2 &
         - sleep 3
         - npm install web3
-        - node testnet-web3.js
+        - ./run-testnet-web3.sh
