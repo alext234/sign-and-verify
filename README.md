@@ -134,5 +134,28 @@ dapp testnet --accounts 2
 node testnet-web3.js
 ```
 
-# Signing and verifying with `web3` at the browser
+# Signing and verifying with `web3` at the browser with Metamask extension
+Metamask is a browser extension that help manage your private keys. It also runs lightweight 
+nodes so interactions with dapps are painless at the browser. For details on how to use the extension, you can 
+check out its website.
+
+
+With Metamask we can build a simple browser-based signing and verifying application and user 
+does not need to run any node or need to know any terminal command at all.
+
+The application is built with Javascript framework `reactjs`, making use of `web3` injected at the browser by Metamask.
+Signing is done locally at the browser and verifying is done via a deployed smart contract. 
+We will walk through each components.
+
+## The smart contract
+
+TODO
+
+## The `reactjs` app
+A smart contract has been deployed on the Rinkeby testnet at https://rinkeby.etherscan.io/address/0x14dfc2d0e5498cc65c75ce0a2e5c48902553793c
+
+TODO
+
+## Screenshots
+
 TODO
