@@ -136,7 +136,7 @@ node testnet-web3.js
 
 # Signing and verifying with `web3` at the browser with Metamask extension
 Metamask is a browser extension that help manage your private keys. It also runs lightweight 
-nodes so interactions with dapps are painless at the browser. For details on how to use the extension, you can 
+node so interactions with dapps are painless at the browser. For details on how to use the extension, you can 
 check out its website.
 
 
@@ -145,7 +145,7 @@ does not need to run any node or need to know any terminal command at all.
 
 The application is built with Javascript framework `reactjs`, making use of `web3` injected at the browser by Metamask.
 Signing is done locally at the browser and verifying is done via a deployed smart contract. 
-We will walk through each components.
+We will walk through each component in subsequent sections.
 
 ## The smart contract
 
