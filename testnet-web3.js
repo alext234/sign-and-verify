@@ -48,7 +48,7 @@ signCallback = function(error, results) {
 		console.log("verifier deployed at address "+ contractAddress)
 		// call the isSigned method on the contract
 		contractInstance.methods
-			.isSigned(signerAddress, hexDataFixed, v, r, s)
+			.isSigned(true, signerAddress, hexDataFixed, v, r, s)
 			.call({from: ethFromAddressToCallVerifier})
 			.then(result => {
 				console.log("isSigned = " + result)
