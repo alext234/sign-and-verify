@@ -149,13 +149,26 @@ We will walk through each component in subsequent sections.
 
 ## The smart contract
 
+There are 2 functions implemented:
+
+```
+	function getSignAddress(bool hasPrefix, bytes32 msgHash, uint8 v, bytes32 r, bytes32 s) external pure returns (address);
+	function isSigned(bool hasPrefix, address _addr, bytes32 msgHash, uint8 v, bytes32 r, bytes32 s) external pure returns (bool);
+```
 TODO
 
 ## The `reactjs` app
 A smart contract has been deployed on the Rinkeby testnet at https://rinkeby.etherscan.io/address/0x14dfc2d0e5498cc65c75ce0a2e5c48902553793c
+And the app is interacting with this contract for verifying purpose, through `web3` injected by Metamask.
 
-TODO
+The app user interface has the following look:
+![App user interface](images/react-screenshot.png?raw=true "App user interface")
 
-## Screenshots
+Once you enter a message, click the `Click to sign` button. A Metamask popup will be displayed for you to sign the hashed message:
 
-TODO
+![Metamask popup](images/metamask-popup.png?raw=true "Metamask popup")
+
+
+Once signing is done, click  the `Click to verify` button to call the contract's function to get the signing address. This address
+should be the same as that displayed in Metamask.
+
