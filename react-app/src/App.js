@@ -31,6 +31,7 @@ class App extends Component {
   getAccountsCallbackToSign = (error, accounts) => {
     if (accounts.length === 0) {
       console.log("There is no account from metamask")
+      this.setState({signResult:"Error - There is no account from metamask"})
     }
     else {
 
