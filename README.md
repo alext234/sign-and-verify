@@ -155,11 +155,26 @@ There are 2 functions implemented:
 	function getSignAddress(bool hasPrefix, bytes32 msgHash, uint8 v, bytes32 r, bytes32 s) external pure returns (address);
 	function isSigned(bool hasPrefix, address _addr, bytes32 msgHash, uint8 v, bytes32 r, bytes32 s) external pure returns (bool);
 ```
-TODO
+
+
+`hasPrefix`, if true, will make the function include the hash of this prefix `"\x19Ethereum Signed Message:\n32"`.
+This prefix is added when signing with clients like `geth`. When signing through Metamask, this prefix is not added
+so `hasPrefix` should be set to false.
+
 
 ## The `reactjs` app
 A smart contract has been deployed on the Rinkeby testnet at https://rinkeby.etherscan.io/address/0x14dfc2d0e5498cc65c75ce0a2e5c48902553793c
 And the app is interacting with this contract for verifying purpose, through `web3` injected by Metamask.
+
+To start the app, `node` is needed.
+
+```
+npm install -g web3
+cd react-app
+npm start
+
+```
+It will automatically open a browser at this address http://localhost:3000/
 
 The app user interface has the following look:
 ![App user interface](images/react-screenshot.png?raw=true "App user interface")
